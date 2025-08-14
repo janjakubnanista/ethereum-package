@@ -132,11 +132,11 @@ def run(plan, args={}):
     raw_jwt_secret = read_file(static_files.JWT_PATH_FILEPATH)
     jwt_file = plan.upload_files(
         src=static_files.JWT_PATH_FILEPATH,
-        name="jwt_file",
+        name="jwt_file-{}".format(network_params.network_id),
     )
     keymanager_file = plan.upload_files(
         src=static_files.KEYMANAGER_PATH_FILEPATH,
-        name="keymanager_file",
+        name="keymanager_file-{}".format(network_params.network_id),
     )
 
     if network_params.perfect_peerdas_enabled:
@@ -171,7 +171,7 @@ def run(plan, args={}):
                 )
             node_key_file = plan.upload_files(
                 src=raw_node_key,
-                name="node-key-file-{0}".format(index + 1),
+                name="node-key-file-{0}-{1}".format(index + 1, network_params.network_id),
             )
     plan.print("Read the prometheus, grafana templates")
 
